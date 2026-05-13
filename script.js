@@ -38,8 +38,15 @@ Sketchy style (with stickers?). X and O on side where the one being worked on is
 */
 
 const gameboard = (function() {
-    const board =  ['', '', '', '', '', '', '', '',''];
-    return { board };
+    let board =  ['', '', '', '', '', '', '', '',''];
+    return {
+        board() {
+            return board;
+        }, 
+        setSpot(index, playerName) {
+            board[index] = playerName;
+        }
+    }
 })();
 
 function createPlayer(name, num) {
@@ -52,11 +59,12 @@ function createPlayer(name, num) {
     return {name, isTurn}
 }
 
-function isGameOver() {
+function gameResult(p1, p2) {
+    const board = gameboard.board();
     function spotsLeft() {
         let spotsLeft = false;
-        for (let i = 0; i < gameboard.board.length; i++) {
-            if (gameboard.board[i] == '') {
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] == '') {
                 spotsLeft = true;
             }
         }
@@ -74,8 +82,8 @@ function isGameOver() {
             [2, 4, 6]
         ]
         const takenSpots = [];
-        for (let i = 0; i < gameboard.board.length; i++) {
-            if (gameboard.board[i] === player.name) {
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === player.name) {
                 takenSpots.push(i);
             }
         }
@@ -86,31 +94,44 @@ function isGameOver() {
         }
         return false;
     }
-    return (!spotsLeft() || isWin(p1) || isWin(p2));
+    if (isWin(p1)) {
+        return p1;
+    } else if (isWin(p2)) {
+        return p2;
+    } else if (!spotsLeft()) {
+        return "tie";
+    } else {
+        return false;
+    }
 }
 
-function swapTurn() {
+function swapTurn(p1, p2) {
     p1.isTurn = !p1.isTurn;
     p2.isTurn = !p2.isTurn;
 }
 
 function playMove(player) { //may nest into another function
     let spot = prompt(`${player.name}Which spot would you like to take`);
-    gameboard.board[spot] = player.name;
-    if (isGameOver(player)) {
-        console.log(`${player.name} wins`);
-    }
-    swapTurn();
+    gameboard.setSpot(spot, player.name);
 }
 
 function playRound() {
-    p1 = createPlayer("Player 1", 1); //change to recieve inputs later.
-    p2 = createPlayer("Player 2", 2);
-    while (!isGameOver()) {
+    const p1 = createPlayer("Player 1", 1); //!!! change to recieve inputs later.
+    const p2 = createPlayer("Player 2", 2);
+    while (gameResult(p1, p2) == false) {
         if (p1.isTurn) {
             playMove(p1);
+            swapTurn(p1, p2);
         } else {
             playMove(p2);
+            swapTurn(p1, p2);
+        }
+    }
+    if (gameResult(p1, p2) !== false) {
+        if (gameResult(p1, p2) == "tie") {
+            console.log(`It is a tie`);
+        } else {
+            console.log(`${gameResult(p1, p2).name} wins`)
         }
     }
 }
