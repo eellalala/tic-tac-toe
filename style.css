@@ -1,0 +1,15 @@
+/* use css grid *. /
+/*highlight uer when theyre in action*/
+
+#game-container {
+    display: flex;
+
+}
+
+#gameboard{
+    display: flex;
+    flex-direction: column;
+}
+.board-row {
+    display: flex;
+}

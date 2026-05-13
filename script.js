@@ -22,6 +22,8 @@ use factory function (make object) IIFE
 *If single instance needed, wrap factory inside IIFE
 *get game to work in console first.
 
+!!! verify no duplicate entries.
+
 DOM
 DOM is able to read whos turn it is. simple to call.
 UI only interacts through playRound()

@@ -7,6 +7,39 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Tic-tac-toe!</h1>
+    <div id="game-container">
+        <div id="players">
+            <div class="player-container" id="p1">
+                <h3>Player 1</h3>
+                <input type="text" id="p1-name-input" placeholder="set name...">
+                <p>x</p>
+            </div>
+            <div class="player-container" id="p2">
+                <h3>Player 2</h3>
+                <input type="text" id="p2-name-input" placeholder="set name...">
+                <p>o</p>
+            </div>
+        </div>
+        <div id="gameboard">
+            <div class="board-row" id="board-row-top">
+                <button class="board-spot" type="button" id="spot-0"></button>
+                <button class="board-spot" type="button" id="spot-1"></button>
+                <button class="board-spot" type="button" id="spot-2"></button>
+            </div>
+            <div class="board-row" id="board-row-center">
+                <button class="board-spot" type="button" id="spot-3"></button>
+                <button class="board-spot" type="button" id="spot-4"></button>
+                <button class="board-spot" type="button" id="spot-5"></button>
+            </div>
+            <div class="board-row" id="board-row-bottom">
+                <button class="board-spot" type="button" id="spot-6"></button>
+                <button class="board-spot" type="button" id="spot-7"></button>
+                <button class="board-spot" type="button" id="spot-8"></button>
+            </div>
+        </div>
+        <button type="button" id="new-game">Reset Game</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
