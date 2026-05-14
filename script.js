@@ -21,26 +21,20 @@ use factory function (make object) IIFE
 *Minimize global code, use factories
 *If single instance needed, wrap factory inside IIFE
 
-!!! verify no duplicate entries.
-
-!!! nameset functionality
-
 DOM
 DOM is able to read whos turn it is. simple to call.
 UI only interacts through playRound()
 if the index is already taken then deactivate the DOM response.
 
-Name input cannot be empty--this will mess up the functionality. Either start with P1 or P2 or make them set a name before..
-
 DESIGN 
 Sketchy style (with stickers?). X and O on side where the one being worked on is highlighted. 
 2000s y2k style. 
+inspo: anakt school alnst? 
 */
 
 //NOTE: Within this game, Player 1 uses 'X' while Player 2 uses 'O'
 
-const p1name = document.getElementById("p1-name-input").value; //!!! this should not run right away
-const p2name = document.getElementById("p2-name-input").value;
+const playerContainer = document.getElementById("players-container");
 const spot0 = document.getElementById("spot-0");
 const spot1 = document.getElementById("spot-1");
 const spot2 = document.getElementById("spot-2");
@@ -55,6 +49,8 @@ const newGameBtn = document.getElementById("new-game");
 const gameResultDisplay = document.getElementById("game-result");
 
 const spotList = [spot0, spot1, spot2, spot3, spot4, spot5, spot6, spot7, spot8];
+const p1 = createPlayer(document.getElementById("p1-name-input").value, 1);
+const p2 = createPlayer(document.getElementById("p2-name-input").value, 2);
 
 const gameboard = (function() {
     let board =  ['', '', '', '', '', '', '', '',''];
@@ -96,7 +92,7 @@ function gameResult(p1, p2) {
         ]
         const takenSpots = [];
         for (let i = 0; i < board.length; i++) {
-            if (board[i] === player.name) {
+            if (board[i] === player.num) {
                 takenSpots.push(i);
             }
         }
@@ -119,7 +115,7 @@ function gameResult(p1, p2) {
 }
 
 function playMove(player, spot) { //may nest into another function
-    gameboard.setSpot(spot, player.name);
+    gameboard.setSpot(spot, player.num);
 }
 
 function swapTurn(p1, p2) {
@@ -140,8 +136,6 @@ function checkGameResult(p1, p2) {
 }
 
 function playRound() {
-    const p1 = createPlayer(p1name, 1);
-    const p2 = createPlayer(p2name, 2);
     boardDisplay.addEventListener('click', (event) => {
         if (event.target.tagName==='BUTTON') {
             if (event.target.textContent !== '' || checkGameResult(p1, p2)) {
@@ -156,7 +150,7 @@ function playRound() {
             }
             swapTurn(p1, p2);
             checkGameResult(p1, p2);
-            console.log(gameboard.board());
+            console.log(gameboard.board()); //!!! remove later
         }
     });
 }
@@ -177,4 +171,14 @@ playRound();
 newGameBtn.addEventListener('click', () => {
     clearGame();
     playRound();
+})
+
+playerContainer.addEventListener('input', (event) => {
+    if (event.target.tagName==='INPUT') {
+        if(event.target.id==="p1-name-input") {
+            p1.name = event.target.value;
+        } else {
+            p2.name = event.target.value;
+        }
+    }
 })
