@@ -39,7 +39,7 @@ Sketchy style (with stickers?). X and O on side where the one being worked on is
 
 //NOTE: Within this game, Player 1 uses 'X' while Player 2 uses 'O'
 
-const p1name = document.getElementById("p1-name-input").value;
+const p1name = document.getElementById("p1-name-input").value; //!!! this should not run right away
 const p2name = document.getElementById("p2-name-input").value;
 const spot0 = document.getElementById("spot-0");
 const spot1 = document.getElementById("spot-1");
@@ -118,39 +118,47 @@ function gameResult(p1, p2) {
     }
 }
 
+function playMove(player, spot) { //may nest into another function
+    gameboard.setSpot(spot, player.name);
+}
+
 function swapTurn(p1, p2) {
     p1.isTurn = !p1.isTurn;
     p2.isTurn = !p2.isTurn;
 }
 
-function playMove(player, spot) { //may nest into another function
-    gameboard.setSpot(spot, player.name);
+function checkGameResult(p1, p2) {
+    if (gameResult(p1, p2) !== false) {
+       if (gameResult(p1, p2) == "tie") {
+            gameResultDisplay.textContent = 'It is a tie';
+        } else {
+            gameResultDisplay.textContent = `${gameResult(p1, p2).name} wins`;
+        }
+        return true;
+    }
+    return false;
 }
 
 function playRound() {
     const p1 = createPlayer(p1name, 1);
     const p2 = createPlayer(p2name, 2);
-    if (gameResult(p1, p2) !== false) {
-        if (gameResult(p1, p2) == "tie") {
-            gameResultDisplay.textContent('It is a tie');
-        } else {
-            gameResultDisplay.textContent(`${gameResult(p1, p2).name} wins`);
-        }
-    } else {
-        boardDisplay.addEventListener('click', (event) => {
-            if (event.target.tagName==='BUTTON') {
-                if (p1.isTurn) {
-                    playMove(p2, event.target.id.at(-1));
-                    event.target.textContent = 'X';
-                    swapTurn(p1, p2);
-                } else {
-                    playMove(p2, event.target.id.at(-1));
-                    event.target.textContent = 'O';
-                    swapTurn(p1, p2);
-                }
+    boardDisplay.addEventListener('click', (event) => {
+        if (event.target.tagName==='BUTTON') {
+            if (event.target.textContent !== '' || checkGameResult(p1, p2)) {
+                return; //prevents placing in occupied areas and after game end
             }
-        });
-    }
+            if (p1.isTurn) {
+                playMove(p1, event.target.id.at(-1)); //consider refactoring this into a function(s)
+                event.target.textContent = 'X';
+            } else {
+                playMove(p2, event.target.id.at(-1));
+                event.target.textContent = 'O';
+            }
+            swapTurn(p1, p2);
+            checkGameResult(p1, p2);
+            console.log(gameboard.board());
+        }
+    });
 }
 
 function clearGame() {
@@ -161,6 +169,7 @@ function clearGame() {
     for (let i = 0; i < 9; i++) { //clear visual gameboard
         spotList[i].textContent = '';
     }
+    gameResultDisplay.textContent = ''; //clear game result
 }
 
 playRound();
