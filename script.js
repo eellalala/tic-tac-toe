@@ -20,16 +20,17 @@ use factory function (make object) IIFE
 
 *Minimize global code, use factories
 *If single instance needed, wrap factory inside IIFE
-*get game to work in console first.
 
 !!! verify no duplicate entries.
+
+!!! nameset functionality
 
 DOM
 DOM is able to read whos turn it is. simple to call.
 UI only interacts through playRound()
 if the index is already taken then deactivate the DOM response.
 
-Name input cannot be empty.
+Name input cannot be empty--this will mess up the functionality. Either start with P1 or P2 or make them set a name before..
 
 UI 
 Cells are buttons not divs, since they are clickable.
@@ -38,6 +39,23 @@ DESIGN
 Sketchy style (with stickers?). X and O on side where the one being worked on is highlighted. 
 2000s y2k style. 
 */
+
+//NOTE: Within this game, Player 1 uses 'X' while Player 2 uses 'O'
+
+const p1name = document.getElementById("p1-name-input").value;
+const p2name = document.getElementById("p2-name-input").value;
+const spot0 = document.getElementById("spot-0");
+const spot1 = document.getElementById("spot-1");
+const spot2 = document.getElementById("spot-2");
+const spot3 = document.getElementById("spot-3");
+const spot4 = document.getElementById("spot-4");
+const spot5 = document.getElementById("spot-5");
+const spot6 = document.getElementById("spot-6");
+const spot7 = document.getElementById("spot-7");
+const spot8 = document.getElementById("spot-8");
+const boardDisplay = document.getElementById("gameboard");
+const newGameBtn = document.getElementById("new-game");
+const gameResultDisplay = document.getElementById("game-result");
 
 const gameboard = (function() {
     let board =  ['', '', '', '', '', '', '', '',''];
@@ -52,13 +70,7 @@ const gameboard = (function() {
 })();
 
 function createPlayer(name, num) {
-    let isTurn;
-    if (num ==1) {
-        isTurn = true;
-    } else {
-        isTurn = false;
-    }
-    return {name, isTurn}
+    return {name, num, isTurn: num === 1}
 }
 
 function gameResult(p1, p2) {
@@ -112,20 +124,19 @@ function swapTurn(p1, p2) {
     p2.isTurn = !p2.isTurn;
 }
 
-function playMove(player) { //may nest into another function
-    let spot = prompt(`${player.name}Which spot would you like to take`);
+function playMove(player, spot) { //may nest into another function
     gameboard.setSpot(spot, player.name);
 }
-
+/* 
 function playRound() {
-    const p1 = createPlayer("Player 1", 1); //!!! change to recieve inputs later.
-    const p2 = createPlayer("Player 2", 2);
+    const p1 = createPlayer(p1name, 1);
+    const p2 = createPlayer(p2name, 2);
     while (gameResult(p1, p2) == false) {
         if (p1.isTurn) {
-            playMove(p1);
+            playMove(p1, spot);
             swapTurn(p1, p2);
         } else {
-            playMove(p2);
+            playMove(p2, spot);
             swapTurn(p1, p2);
         }
     }
@@ -138,4 +149,41 @@ function playRound() {
     }
 }
 
+boardDisplay.addEventListener('click', (event) => {
+    if (event.target.tagName==='BUTTON') {
+        playMove(p1, spot1)
+    }
+});
+*/
+
+function playRound() {
+    const p1 = createPlayer(p1name, 1);
+    const p2 = createPlayer(p2name, 2);
+    if (gameResult(p1, p2) !== false) {
+        if (gameResult(p1, p2) == "tie") {
+            gameResultDisplay.textContent('It is a tie');
+        } else {
+            gameResultDisplay.textContent(`${gameResult(p1, p2).name} wins`);
+        }
+    } else {
+        boardDisplay.addEventListener('click', (event) => {
+            if (event.target.tagName==='BUTTON') {
+                if (p1.isTurn) {
+                    playMove(p2, event.target.id.at(-1));
+                    event.target.textContent = 'X';
+                    swapTurn(p1, p2);
+                } else {
+                    playMove(p2, event.target.id.at(-1));
+                    event.target.textContent = 'O';
+                    swapTurn(p1, p2);
+                }
+            }
+        });
+    }
+}
+
 playRound();
+
+newGameBtn.addEventListener('click', () => {
+    
+})
