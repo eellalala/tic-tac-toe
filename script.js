@@ -30,27 +30,27 @@ DESIGN
 Sketchy style (with stickers?). X and O on side where the one being worked on is highlighted. 
 2000s y2k style. 
 inspo: anakt school alnst? 
+
+TODO: 
+- Redesign Code Structure
+perhaps remove player 1 and 2 and only keep x and o tto avoid confusions.
+- Style
+
 */
 
 //NOTE: Within this game, Player 1 uses 'X' while Player 2 uses 'O'
 
 const playerContainer = document.getElementById("players-container");
-const spot0 = document.getElementById("spot-0");
-const spot1 = document.getElementById("spot-1");
-const spot2 = document.getElementById("spot-2");
-const spot3 = document.getElementById("spot-3");
-const spot4 = document.getElementById("spot-4");
-const spot5 = document.getElementById("spot-5");
-const spot6 = document.getElementById("spot-6");
-const spot7 = document.getElementById("spot-7");
-const spot8 = document.getElementById("spot-8");
+const spotList = [];
+for (let i = 0; i< 9; i++) {
+    spotList[i] = document.getElementById("spot-"+i);
+}
 const boardDisplay = document.getElementById("gameboard");
 const newGameBtn = document.getElementById("new-game");
 const gameResultDisplay = document.getElementById("game-result");
 
-const spotList = [spot0, spot1, spot2, spot3, spot4, spot5, spot6, spot7, spot8];
-const p1 = createPlayer(document.getElementById("p1-name-input").value, 1);
-const p2 = createPlayer(document.getElementById("p2-name-input").value, 2);
+const pX = createPlayer(document.getElementById("pX-name-input").value, "X");
+const pO = createPlayer(document.getElementById("pO-name-input").value, "O");
 
 const gameboard = (function() {
     let board =  ['', '', '', '', '', '', '', '',''];
@@ -58,17 +58,17 @@ const gameboard = (function() {
         board() {
             return board;
         }, 
-        setSpot(index, playerName) {
-            board[index] = playerName;
+        setSpot(index, playerSymbol) {
+            board[index] = playerSymbol;
         }
     }
 })();
 
-function createPlayer(name, num) {
-    return {name, num, isTurn: num === 1}
+function createPlayer(name, symbol) {
+    return {name, symbol, isTurn: symbol === "X"}
 }
 
-function gameResult(p1, p2) {
+function gameResult(pX, pO) {
     const board = gameboard.board();
     function spotsLeft() {
         let spotsLeft = false;
@@ -92,7 +92,7 @@ function gameResult(p1, p2) {
         ]
         const takenSpots = [];
         for (let i = 0; i < board.length; i++) {
-            if (board[i] === player.num) {
+            if (board[i] === player.symbol) {
                 takenSpots.push(i);
             }
         }
@@ -103,10 +103,10 @@ function gameResult(p1, p2) {
         }
         return false;
     }
-    if (isWin(p1)) {
-        return p1;
-    } else if (isWin(p2)) {
-        return p2;
+    if (isWin(pX)) {
+        return pX;
+    } else if (isWin(pO)) {
+        return pO;
     } else if (!spotsLeft()) {
         return "tie";
     } else {
@@ -115,20 +115,20 @@ function gameResult(p1, p2) {
 }
 
 function playMove(player, spot) { //may nest into another function
-    gameboard.setSpot(spot, player.num);
+    gameboard.setSpot(spot, player.symbol);
 }
 
-function swapTurn(p1, p2) {
-    p1.isTurn = !p1.isTurn;
-    p2.isTurn = !p2.isTurn;
+function swapTurn(pX, pO) {
+    pX.isTurn = !pX.isTurn;
+    pO.isTurn = !pO.isTurn;
 }
 
-function checkGameResult(p1, p2) {
-    if (gameResult(p1, p2) !== false) {
-       if (gameResult(p1, p2) == "tie") {
+function checkGameResult(pX, pO) {
+    if (gameResult(pX, pO) !== false) {
+       if (gameResult(pX, pO) == "tie") {
             gameResultDisplay.textContent = 'It is a tie';
         } else {
-            gameResultDisplay.textContent = `${gameResult(p1, p2).name} wins`;
+            gameResultDisplay.textContent = `${gameResult(pX, pO).name} wins`;
         }
         return true;
     }
@@ -138,18 +138,18 @@ function checkGameResult(p1, p2) {
 function playRound() {
     boardDisplay.addEventListener('click', (event) => {
         if (event.target.tagName==='BUTTON') {
-            if (event.target.textContent !== '' || checkGameResult(p1, p2)) {
-                return; //prevents placing in occupied areas and after game end
+            if (event.target.textContent !== '' || checkGameResult(pX, pO)) {
+                return; //prevents placing in occupied areas or after game end
             }
-            if (p1.isTurn) {
-                playMove(p1, event.target.id.at(-1)); //consider refactoring this into a function(s)
+            if (pX.isTurn) {
+                playMove(pX, event.target.id.at(-1)); //consider refactoring this into a function(s)
                 event.target.textContent = 'X';
             } else {
-                playMove(p2, event.target.id.at(-1));
+                playMove(pO, event.target.id.at(-1));
                 event.target.textContent = 'O';
             }
-            swapTurn(p1, p2);
-            checkGameResult(p1, p2);
+            swapTurn(pX, pO);
+            checkGameResult(pX, pO);
             console.log(gameboard.board()); //!!! remove later
         }
     });
@@ -166,8 +166,6 @@ function clearGame() {
     gameResultDisplay.textContent = ''; //clear game result
 }
 
-playRound();
-
 newGameBtn.addEventListener('click', () => {
     clearGame();
     playRound();
@@ -175,10 +173,12 @@ newGameBtn.addEventListener('click', () => {
 
 playerContainer.addEventListener('input', (event) => {
     if (event.target.tagName==='INPUT') {
-        if(event.target.id==="p1-name-input") {
-            p1.name = event.target.value;
+        if(event.target.id==="pX-name-input") {
+            pX.name = event.target.value;
         } else {
-            p2.name = event.target.value;
+            pO.name = event.target.value;
         }
     }
 })
+
+playRound();
