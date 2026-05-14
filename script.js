@@ -32,9 +32,6 @@ if the index is already taken then deactivate the DOM response.
 
 Name input cannot be empty--this will mess up the functionality. Either start with P1 or P2 or make them set a name before..
 
-UI 
-Cells are buttons not divs, since they are clickable.
-
 DESIGN 
 Sketchy style (with stickers?). X and O on side where the one being worked on is highlighted. 
 2000s y2k style. 
@@ -56,6 +53,8 @@ const spot8 = document.getElementById("spot-8");
 const boardDisplay = document.getElementById("gameboard");
 const newGameBtn = document.getElementById("new-game");
 const gameResultDisplay = document.getElementById("game-result");
+
+const spotList = [spot0, spot1, spot2, spot3, spot4, spot5, spot6, spot7, spot8];
 
 const gameboard = (function() {
     let board =  ['', '', '', '', '', '', '', '',''];
@@ -127,34 +126,6 @@ function swapTurn(p1, p2) {
 function playMove(player, spot) { //may nest into another function
     gameboard.setSpot(spot, player.name);
 }
-/* 
-function playRound() {
-    const p1 = createPlayer(p1name, 1);
-    const p2 = createPlayer(p2name, 2);
-    while (gameResult(p1, p2) == false) {
-        if (p1.isTurn) {
-            playMove(p1, spot);
-            swapTurn(p1, p2);
-        } else {
-            playMove(p2, spot);
-            swapTurn(p1, p2);
-        }
-    }
-    if (gameResult(p1, p2) !== false) {
-        if (gameResult(p1, p2) == "tie") {
-            console.log(`It is a tie`);
-        } else {
-            console.log(`${gameResult(p1, p2).name} wins`)
-        }
-    }
-}
-
-boardDisplay.addEventListener('click', (event) => {
-    if (event.target.tagName==='BUTTON') {
-        playMove(p1, spot1)
-    }
-});
-*/
 
 function playRound() {
     const p1 = createPlayer(p1name, 1);
@@ -182,8 +153,19 @@ function playRound() {
     }
 }
 
+function clearGame() {
+    //!!! is clearing players needed? or will they just be redeclared
+    for (let i = 0; i < gameboard.board().length; i++) { //clear gameboard data
+        gameboard.setSpot(i, '');
+    }
+    for (let i = 0; i < 9; i++) { //clear visual gameboard
+        spotList[i].textContent = '';
+    }
+}
+
 playRound();
 
 newGameBtn.addEventListener('click', () => {
-    
+    clearGame();
+    playRound();
 })
