@@ -19,9 +19,9 @@ game result on a notepad
 reset - have circled scribble around text that expands when you hover (in secondary color */ 
 
 :root {
-  --primary-color: rgba(103, 191, 187);
-  --secondary-color: rgba(227, 81, 146);
-  --tertiary-color: rgba(182, 187, 190);
+  --primary-color: rgb(103, 191, 187);
+  --secondary-color: rgb(227, 81, 146);
+  --tertiary-color: rgb(182, 187, 190);
 }
 
 .cabin-sketch-regular {
@@ -105,19 +105,31 @@ h1 {
 }
 
 .border-bottom {
-    border-bottom: 2px solid var(--tertiary-color);
+    border-bottom: 2px solid;
 }
 
 .border-top {
-    border-top: 2px solid var(--tertiary-color);
+    border-top: 2px solid;
 }
 
 .border-left {
-    border-left: 2px solid var(--tertiary-color);
+    border-left: 2px solid;
 }
 
 .border-right {
-    border-right: 2px solid var(--tertiary-color);
+    border-right: 2px solid;
+}
+
+.border-primary {
+    border-color: var(--primary-color);
+}
+
+.border-secondary {
+    border-color: var(--secondary-color);
+}
+
+.border-tertiary {
+    border-color: var(--tertiary-color);
 }
 
 #game-result-container {

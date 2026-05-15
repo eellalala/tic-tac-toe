@@ -1,3 +1,7 @@
+const primaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+const secondaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+const tertiaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--tertiary-color');
+
 const playerContainer = document.getElementById("players-container");
 const spotList = [];
 for (let i = 0; i< 9; i++) {
@@ -108,13 +112,27 @@ function gameResult(pX, pO) {
 
 function displayGame(pX, pO) {
     for (let i = 0; i< gameboard.board().length; i++) {
-        spotList[i].textContent = gameboard.board()[i];
+        let symbol = gameboard.board()[i];
+        spotList[i].textContent = symbol;
+        if (symbol === "X") {
+            spotList[i].style.color = primaryColor;
+        } else {
+            spotList[i].style.color = secondaryColor;
+        }
     }
     if (gameResult(pX, pO) !== false) {
        if (gameResult(pX, pO) == "tie") {
             gameResultDisplay.textContent = "It's a tie.";
         } else {
             gameResultDisplay.textContent = `${gameResult(pX, pO).name} wins!`;
+            for (let i = 0; i<gameboard.board().length; i++) {
+                spotList[i].classList.remove("border-tertiary");
+                if (gameResult(pX, pO).symbol==="X") {
+                    spotList[i].classList.add("border-primary");
+                } else {
+                    spotList[i].classList.add("border-secondary");
+                }
+            }
         }
     }
 }
@@ -125,6 +143,9 @@ function clearGame() {
     }
     for (let i = 0; i < 9; i++) { //clear visual gameboard
         spotList[i].textContent = '';
+        spotList[i].classList.remove("border-primary");
+        spotList[i].classList.remove("border-secondary");
+        spotList[i].classList.add("border-tertiary");
     }
     gameResultDisplay.textContent = ''; //clear game result
 }
