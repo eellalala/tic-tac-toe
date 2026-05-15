@@ -1,8 +1,14 @@
 const primaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
 const secondaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
 const tertiaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--tertiary-color');
+const primaryColorHi = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color-highlight');
+const secondaryColorHi = window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-color-highlight');
+
 
 const playerContainer = document.getElementById("players-container");
+const pXInfo = document.getElementById("pX-info");
+const pOInfo = document.getElementById("pO-info");
+
 const spotList = [];
 for (let i = 0; i< 9; i++) {
     spotList[i] = document.getElementById("spot-"+i);
@@ -111,6 +117,8 @@ function gameResult(pX, pO) {
 }
 
 function displayGame(pX, pO) {
+    pXInfo.classList.toggle('primary-highlight');
+    pOInfo.classList.toggle('secondary-highlight');
     for (let i = 0; i< gameboard.board().length; i++) {
         let symbol = gameboard.board()[i];
         spotList[i].textContent = symbol;

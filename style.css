@@ -3,8 +3,6 @@ DESIGN
 Sketchy style (with stickers?). X and O on side where the one being in action is highlighted (school highlighter effect translate x to right animation). 
 inspo: anakt school alnst
 
-put the name and player title within a bookmark looking containee
-
 responsiveness (media queries)
 
 changable profile photos
@@ -18,6 +16,9 @@ reset - have circled scribble around text that expands when you hover (in second
   --primary-color: rgb(103, 191, 187);
   --secondary-color: rgb(227, 81, 146);
   --tertiary-color: rgb(182, 187, 190);
+  --primary-color-highlight: rgba(103, 191, 187, 0.2);
+  --secondary-color-highlight: rgba(227, 81, 146, 0.2);
+
 }
 
 .cabin-sketch-regular {
@@ -94,19 +95,40 @@ h1 {
 
 .player-info {
     display: flex;
-    gap: 5%;
+    gap: 3%;
+    align-items: center;
+    border-radius: 50px;
+    padding: 0 5%;
+}
+
+.player-info h3{
+    white-space: nowrap;
+}
+
+.primary-highlight {
+    background-color: var(--primary-color-highlight);
+}
+
+.secondary-highlight {
+    background-color: var(--secondary-color-highlight);
 }
 
 .name-input {
-    border: 2px solid green;
+    border: 2px solid var(--tertiary-color);
     border-radius: 3px;
+    height: 2em;
+    width: 7em;
+
     font-family: "Schoolbell";
+    font-size: 1em;
 }
 
 .profile-pic {
     min-width: 70%;
     border-radius: 15px;
     transition: ease 0.3s;
+    box-shadow: 5px 6px 5px var(--tertiary-color);
+    margin: 5%;
 }
 
 .profile-pic:hover {
@@ -158,27 +180,35 @@ h1 {
     border-color: var(--tertiary-color);
 }
 
+#game-info {
+    margin: 5%;
+}
+
 #game-result-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     
-    background-color: brown;
+    background-color: var(--tertiary-color);
     min-width: 200px;
-    min-height: 100px;
+    min-height: 200px;
 
     text-align: center;
     font-size: 1.5em;
     margin: 3%;
+    padding: 5%;
 }
 
 #new-game-btn {
     all: unset;
-    min-width: 100px;
-    min-height: 50px;
-    background-image: url(public/hyuna.jpg);
-    background-size: cover;
+    min-width: 100%;
+    min-height: 10%;
+
+    border: 4px solid var(--secondary-color);
+    border-radius: 500px;
 
     text-align: center;
     font-size: 1.5em;
+
+    margin-top: 15%;
 }
