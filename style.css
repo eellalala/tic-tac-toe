@@ -1,22 +1,18 @@
 /*
 DESIGN 
 Sketchy style (with stickers?). X and O on side where the one being in action is highlighted (school highlighter effect translate x to right animation). 
-2000s y2k style. 
 inspo: anakt school alnst
 
-put the name and player title within a bookmark looking container (hover expand ease in when)
+put the name and player title within a bookmark looking containee
 
 responsiveness (media queries)
 
 changable profile photos
 
-frame of game board changes to the winning color after they win. 
+game result on a sticky note 
 
-X and Os are colored primary / secondary
-
-game result on a notepad 
-
-reset - have circled scribble around text that expands when you hover (in secondary color */ 
+reset - have circled scribble around text that expands when you hover (in secondary color 
+*/ 
 
 :root {
   --primary-color: rgb(103, 191, 187);
@@ -81,10 +77,40 @@ h1 {
     align-self: center;
 }
 
-#player-container {
+#players-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     min-width: 30%;
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10%;
+}
+
+.player-info {
+    display: flex;
+    gap: 5%;
+}
+
+.name-input {
+    border: 2px solid green;
+    border-radius: 3px;
+    font-family: "Schoolbell";
+}
+
+.profile-pic {
+    min-width: 70%;
+    border-radius: 15px;
+    transition: ease 0.3s;
+}
+
+.profile-pic:hover {
+    transform: scale(1.06);
 }
 
 #gameboard{
@@ -133,6 +159,10 @@ h1 {
 }
 
 #game-result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
     background-color: brown;
     min-width: 200px;
     min-height: 100px;
