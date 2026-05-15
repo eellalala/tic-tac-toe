@@ -4,43 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css"> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
-    <h2>Let's play:</h2>
-    <h1>Tic-tac-toe</h1>
+    <h2 class="secondary-color">Let's play:</h2>
+    <h1 class="cabin-sketch-bold primary-color">Tic-Tac-Toe</h1>
     <div id="game-container">
         <div id="players-container">
             <div class="player-container" id="pX">
-                <h3>Player X</h3>
-                <input type="text" id="pX-name-input" value="Player X">
-                <p>x</p>
+                <img class="profile-pic" src="public/mizi.jpg" alt="Player X Profile Picture">
+                <h3 class="primary-color">Player X</h3>
+                <input type="text" id="pX-name-input" value="Player X Name">
             </div>
             <div class="player-container" id="pO">
-                <h3>Player O</h3>
-                <input type="text" id="pO-name-input" value="Player O">
-                <p>o</p>
+                <img class="profile-pic" src="public/till.jpg" alt="Player O Profile Picture">
+                <h3 class="secondary-color">Player O</h3>
+                <input type="text" id="pO-name-input" value="Player O Name">
             </div>
         </div>
         <div id="gameboard">
-            <div class="board-row" id="board-row-top">
-                <button class="board-spot" type="button" id="spot-0"></button>
-                <button class="board-spot" type="button" id="spot-1"></button>
-                <button class="board-spot" type="button" id="spot-2"></button>
-            </div>
-            <div class="board-row" id="board-row-center">
-                <button class="board-spot" type="button" id="spot-3"></button>
-                <button class="board-spot" type="button" id="spot-4"></button>
-                <button class="board-spot" type="button" id="spot-5"></button>
-            </div>
-            <div class="board-row" id="board-row-bottom">
-                <button class="board-spot" type="button" id="spot-6"></button>
-                <button class="board-spot" type="button" id="spot-7"></button>
-                <button class="board-spot" type="button" id="spot-8"></button>
-            </div>
+            <button class="board-spot border-bottom border-right" type="button" id="spot-0"></button>
+            <button class="board-spot border-bottom border-right border-left" type="button" id="spot-1"></button>
+            <button class="board-spot border-bottom border-left" type="button" id="spot-2"></button>
+            <button class="board-spot border-top border-bottom border-right" type="button" id="spot-3"></button>
+            <button class="board-spot border-top border-bottom border-right border-left" type="button" id="spot-4"></button>
+            <button class="board-spot border-top border-bottom border-left" type="button" id="spot-5"></button>
+            <button class="board-spot border-top border-right" type="button" id="spot-6"></button>
+            <button class="board-spot border-top border-right border-left" type="button" id="spot-7"></button>
+            <button class="board-spot border-top border-left" type="button" id="spot-8"></button>
         </div>
-        <button type="button" id="new-game">Start New Game</button>
-        <p id="game-result">Game Result will display here</p>
+        <div id="game-info">
+            <div id="game-result-container">
+                <p id="game-result">Game Result will display here</p>
+            </div>
+            <button type="button" id="new-game">Play Again</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

@@ -1,15 +1,112 @@
-/* use css grid *. /
-/*highlight uer when theyre in action*/
+/*
+DESIGN 
+Sketchy style (with stickers?). X and O on side where the one being in action is highlighted (school highlighter effect translate x to right animation). 
+2000s y2k style. 
+inspo: anakt school alnst
+
+put the name and player title within a bookmark looking container (hover expand ease in when)
+
+responsiveness (media queries)
+
+changable profile photos
+
+frame of game board changes to the winning color after they win. 
+
+X and Os are colored primary / secondary
+
+game result on a notepad 
+
+reset - have circled scribble around text that expands when you hover (in secondary color */ 
+
+:root {
+  --primary-color: rgba(103, 191, 187);
+  --secondary-color: rgba(227, 81, 146);
+  --tertiary-color: rgba(182, 187, 190);
+}
+
+.cabin-sketch-regular {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cabin-sketch-bold {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.schoolbell {
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+body {
+    font-family: Schoolbell;
+    background-size: 39px 39px;
+    background-image:
+        linear-gradient(to right, rgba(107, 199, 194, 0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(107, 199, 194, 0.5) 1px, transparent 1px);
+    box-sizing: border-box;
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+.profile-pic {
+    width: 5em;
+}
 
 #game-container {
     display: flex;
+}
 
+#player-container {
+    display: flex;
+    align-items: center;
+    min-width: 30%;
 }
 
 #gameboard{
-    display: flex;
-    flex-direction: column;
+    align-self: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
-.board-row {
-    display: flex;
+
+.board-spot {
+    all: unset;
+    box-sizing: border-box;
+    background-color: transparent;
+    width: 150px;
+    height: 150px;
+
+    font-size: 3em;
+    text-align: center;
+}
+
+.border-bottom {
+    border-bottom: 2px solid var(--tertiary-color);
+}
+
+.border-top {
+    border-top: 2px solid var(--tertiary-color);
+}
+
+.border-left {
+    border-left: 2px solid var(--tertiary-color);
+}
+
+.border-right {
+    border-right: 2px solid var(--tertiary-color);
 }
