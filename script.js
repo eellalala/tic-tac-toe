@@ -3,7 +3,7 @@ const spotList = [];
 for (let i = 0; i< 9; i++) {
     spotList[i] = document.getElementById("spot-"+i);
 }
-const newGameBtn = document.getElementById("new-game");
+const newGameBtn = document.getElementById("new-game-btn");
 const gameResultDisplay = document.getElementById("game-result");
 
 const gameboard = (function() {

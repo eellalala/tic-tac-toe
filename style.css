@@ -50,6 +50,8 @@ body {
         linear-gradient(to right, rgba(107, 199, 194, 0.5) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(107, 199, 194, 0.5) 1px, transparent 1px);
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .primary-color {
@@ -60,8 +62,14 @@ body {
     color: var(--secondary-color);
 }
 
+#subtitle {
+    align-self: center;
+    margin-bottom: -50px;
+}
+
 h1 {
     font-size: 4rem;
+    align-self: center;
 }
 
 .profile-pic {
@@ -70,6 +78,7 @@ h1 {
 
 #game-container {
     display: flex;
+    align-self: center;
 }
 
 #player-container {
@@ -88,10 +97,10 @@ h1 {
     all: unset;
     box-sizing: border-box;
     background-color: transparent;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
 
-    font-size: 3em;
+    font-size: 5em;
     text-align: center;
 }
 
@@ -109,4 +118,25 @@ h1 {
 
 .border-right {
     border-right: 2px solid var(--tertiary-color);
+}
+
+#game-result-container {
+    background-color: brown;
+    min-width: 200px;
+    min-height: 100px;
+
+    text-align: center;
+    font-size: 1.5em;
+    margin: 3%;
+}
+
+#new-game-btn {
+    all: unset;
+    min-width: 100px;
+    min-height: 50px;
+    background-image: url(public/hyuna.jpg);
+    background-size: cover;
+
+    text-align: center;
+    font-size: 1.5em;
 }
