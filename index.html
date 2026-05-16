@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Tic-Tac-Toe</title>
 </head>
 <body>
     <h2 class="secondary-color" id="subtitle">Let's play:</h2>
@@ -21,7 +21,7 @@
     <div id="game-container">
         <div id="players-container">
             <div class="player-container" id="pX">
-                <div class="profile-select" id="profile-select-X">
+                <div class="profile-select hidden" id="profile-select-X">
                     <img class="select-pic" id="select-mizi" src="public/mizi.jpg" alt="Mizi Profile Picture">
                     <img class="select-pic" id="select-sua" src="public/sua.jpg" alt="Sua Profile Picture">
                     <img class="select-pic" id="select-hyuna" src="public/hyuna.jpg" alt="Hyuna Profile Picture">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="player-container" id="pO">
-                <div class="profile-select" id="profile-select-O">
+                <div class="profile-select hidden" id="profile-select-O">
                     <img class="select-pic" id="select-till" src="public/till.jpg" alt="Till Profile Picture">
                     <img class="select-pic" id="select-ivan" src="public/ivan.jpg" alt="Ivan Profile Picture">
                     <img class="select-pic" id="select-luka" src="public/luka.jpg" alt="Luka Profile Picture">
@@ -58,7 +58,7 @@
         </div>
         <div id="game-info">
             <div id="game-result-container">
-                <p id="game-result">Game Result will display here</p>
+                <p id="game-result"></p>
             </div>
             <button type="button" id="new-game-btn">Play Again</button>
         </div>

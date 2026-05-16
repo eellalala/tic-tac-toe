@@ -1,16 +1,3 @@
-/*
-DESIGN 
-Sketchy style (with stickers?).
-
-(school highlighter effect translate x to right animation). 
-
-responsiveness (media queries)
-
-changable profile photos
-game result on a sticky note 
-reset - have circled scribble around text that expands when you hover
-*/ 
-
 :root {
   --primary-color: rgb(103, 191, 187);
   --secondary-color: rgb(227, 81, 146);
@@ -38,6 +25,9 @@ reset - have circled scribble around text that expands when you hover
   font-style: normal;
 }
 
+.hidden {
+    display: none !important;
+}
 
 body {
     font-family: Schoolbell;
@@ -91,7 +81,8 @@ h1 {
     align-items: center;
     margin: 10%;
 
-    width: 50%;
+    width: 12em;
+    flex-shrink: 0;
 }
 
 .player-info {
@@ -125,7 +116,7 @@ h1 {
 }
 
 .profile-pic {
-    min-width: 70%;
+    width: 70%;
     border-radius: 15px;
     transition: ease 0.3s;
     box-shadow: 5px 6px 5px var(--tertiary-color);
@@ -224,11 +215,12 @@ h1 {
     min-height: 200px;
 
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2em;
     margin: 3%;
     padding: 5%;
 
     box-shadow: 5px 6px 5px rgb(150, 159, 164);
+    border-radius: 2px;
 }
 
 #new-game-btn {

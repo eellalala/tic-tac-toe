@@ -169,11 +169,22 @@ playerContainer.addEventListener('input', (event) => {
             gameController.getPlayers().pO.name = event.target.value;
         }
     }
-})
+}) 
 
 const profileChange = (function() {
     const Xpfp = document.getElementById("X-pfp");
     const Opfp = document.getElementById("O-pfp");
+    const pfpSelectX = document.getElementById('profile-select-X');
+    const pfpSelectO = document.getElementById('profile-select-O');
+
+    Xpfp.addEventListener('click', () => {
+        pfpSelectX.classList.toggle('hidden'); 
+    })
+
+    Opfp.addEventListener('click', () => {
+        pfpSelectO.classList.toggle('hidden'); 
+    })
+
     const profileNames = ['mizi', 'sua', 'hyuna', 'till', 'ivan', 'luka'];
     const profileVar = [];
     for (let i = 0; i< profileNames.length; i++) {
@@ -182,8 +193,10 @@ const profileChange = (function() {
             let pfpPic = 'public/' + profileNames[i] + '.jpg';
             if (i < 3) {
                 Xpfp.setAttribute('src', pfpPic);
+                pfpSelectX.classList.toggle('hidden'); 
             } else {
                 Opfp.setAttribute('src', pfpPic);
+                pfpSelectO.classList.toggle('hidden');
             }
         })
     }
