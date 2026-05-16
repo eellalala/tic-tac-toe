@@ -4,7 +4,6 @@ const tertiaryColor = window.getComputedStyle(document.documentElement).getPrope
 const primaryColorHi = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color-highlight');
 const secondaryColorHi = window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-color-highlight');
 
-
 const playerContainer = document.getElementById("players-container");
 const pXInfo = document.getElementById("pX-info");
 const pOInfo = document.getElementById("pO-info");
@@ -171,3 +170,21 @@ playerContainer.addEventListener('input', (event) => {
         }
     }
 })
+
+const profileChange = (function() {
+    const Xpfp = document.getElementById("X-pfp");
+    const Opfp = document.getElementById("O-pfp");
+    const profileNames = ['mizi', 'sua', 'hyuna', 'till', 'ivan', 'luka'];
+    const profileVar = [];
+    for (let i = 0; i< profileNames.length; i++) {
+        profileVar[i] = document.getElementById("select-"+profileNames[i]);
+        profileVar[i].addEventListener('click', () => {
+            let pfpPic = 'public/' + profileNames[i] + '.jpg';
+            if (i < 3) {
+                Xpfp.setAttribute('src', pfpPic);
+            } else {
+                Opfp.setAttribute('src', pfpPic);
+            }
+        })
+    }
+})();
