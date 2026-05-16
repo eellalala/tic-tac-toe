@@ -20,5 +20,5 @@ I went with a nostalgic school-inspired aesthetic for styling, and added the fun
 
 ## 💭 Future
 - Improve responsiveness with media queries
-- Design custom SVGs to enhance the aesthetic (sticky notes, scribbles, stickers, etc.)
+- Design custom SVGs to enhance the visuals (sticky notes, scribbles, stickers, etc.)
 - Implement animations to make the game more immersive (highlighting user, scribble around reset button)
