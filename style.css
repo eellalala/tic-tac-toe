@@ -1,15 +1,14 @@
 /*
 DESIGN 
-Sketchy style (with stickers?). X and O on side where the one being in action is highlighted (school highlighter effect translate x to right animation). 
-inspo: anakt school alnst
+Sketchy style (with stickers?).
+
+(school highlighter effect translate x to right animation). 
 
 responsiveness (media queries)
 
 changable profile photos
-
 game result on a sticky note 
-
-reset - have circled scribble around text that expands when you hover (in secondary color 
+reset - have circled scribble around text that expands when you hover
 */ 
 
 :root {
@@ -91,6 +90,8 @@ h1 {
     flex-direction: column;
     align-items: center;
     margin: 10%;
+
+    width: 50%;
 }
 
 .player-info {
@@ -133,6 +134,35 @@ h1 {
 
 .profile-pic:hover {
     transform: scale(1.06);
+}
+
+.profile-select {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-evenly;
+    border-radius: 15px;
+}
+
+.profile-select > .select-pic {
+    border-radius: 10px;
+    width: 30%;
+    margin: 3% 0;
+
+    transition: ease 0.3s;
+    box-shadow: 2px 3px 2px var(--tertiary-color);
+}
+
+.profile-select > .select-pic:hover {
+    transform: scale(1.06);
+}
+
+#profile-select-X {
+    background-color: var(--primary-color-highlight)
+}
+
+#profile-select-O {
+    background-color: var(--secondary-color-highlight)
 }
 
 #gameboard{
@@ -197,6 +227,8 @@ h1 {
     font-size: 1.5em;
     margin: 3%;
     padding: 5%;
+
+    box-shadow: 5px 6px 5px rgb(150, 159, 164);
 }
 
 #new-game-btn {
@@ -211,4 +243,10 @@ h1 {
     font-size: 1.5em;
 
     margin-top: 15%;
+
+    transition: 0.2s ease;
+}
+
+#new-game-btn:hover {
+    border: 4px solid var(--primary-color);
 }
